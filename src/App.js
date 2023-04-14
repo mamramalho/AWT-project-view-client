@@ -1,28 +1,39 @@
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import "./App.css";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
 
-function App() {
-  const [listOfEvents, setListOfEvents] = useState([]);
+import Home from "./components/Home";
+import Events from "./components/Events";
 
-  useEffect(() => {
-    axios.get("http://localhost:3001/event").then((response) => {
-      setListOfEvents(response.data);
-    });
-  });
-
+const App = () => {
   return (
-    <div className="App">
-      {listOfEvents.map((value, key) => {
-        return (
-          <div className="events">
-            <div className="title"> {value.title} </div>
-            <div className="description"> {value.description} </div>
-          </div>
-        );
-      })}
-    </div>
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <NavLink exact activeClassName="active" to="/">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact activeClassName="active" to="/events">
+              Events
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/events" element={<Events />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
