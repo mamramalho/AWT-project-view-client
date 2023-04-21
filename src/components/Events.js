@@ -13,14 +13,16 @@ function Events() {
 
   return (
     <div className="App">
-      {listOfEvents.map((value, key) => {
-        return (
-          <div className="events">
-            <div className="title"> {value.title} </div>
-            <div className="description"> {value.description} </div>
-          </div>
-        );
-      })}
+      <ul>
+        {listOfEvents.map((value, key) => {
+          return (
+            <div className="events">
+              <div className="title">{value.title}</div>
+              <div className="description">{value.description}</div>
+            </div>
+          );
+        })}
+      </ul>
     </div>
   );
 }

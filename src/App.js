@@ -1,39 +1,27 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  NavLink,
-} from "react-router-dom";
-import "./App.css";
-
+import React, { Component } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Events from "./components/Events";
+import Calendar from "./components/Calendar";
+import Login from "./components/Login";
 
-const App = () => {
-  return (
-    <Router>
-      <nav>
-        <ul>
-          <li>
-            <NavLink exact activeClassName="active" to="/">
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink exact activeClassName="active" to="/events">
-              Events
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/events" element={<Events />} />
-      </Routes>
-    </Router>
-  );
-};
+class App extends Component {
+  render() {
+    return (
+      <>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/calendar" element={<Calendar />} />
+            <Route exact path="/events" element={<Events />} />
+            <Route exact path="/login" element={<Login />} />
+          </Routes>
+        </Router>
+      </>
+    );
+  }
+}
 
 export default App;
