@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Events from "./components/Events";
 import Calendar from "./components/Calendar";
 import Login from "./components/Login";
+import Footer from "./components/Footer";
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
             <Route exact path="/events" element={<Events />} />
             <Route exact path="/login" element={<Login />} />
           </Routes>
+          <Footer />
         </Router>
       </>
     );
