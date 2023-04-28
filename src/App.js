@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
 import Events from "./components/Events";
 import Calendar from "./components/Calendar";
+import Contact from "./components/Contact";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import Footer from "./components/Footer";
 
 class App extends Component {
@@ -14,10 +15,11 @@ class App extends Component {
         <Router>
           <Navbar />
           <Routes>
-            <Route exact path="/" element={<Home />} />
             <Route exact path="/calendar" element={<Calendar />} />
             <Route exact path="/events" element={<Events />} />
             <Route exact path="/login" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/contact" element={<Contact />} />
           </Routes>
           <Footer />
         </Router>

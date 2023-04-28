@@ -7,15 +7,7 @@
     font-family: "Poppins", sans-serif;
 }
 
-.title {
-    font-family: 'Post No Bills Jaffna', sans-serif;
-    font-size: 80px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #ff0000;
-}
-
-.container {
+.containerC {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -23,20 +15,21 @@
     align-items: center;
 }
 
-.form-container {
+.form-contact {
+    min-height: 80vh;
+    min-width: 130vh;
     background-color: white;
-    width: 30em;
-    height: auto;
+    margin: auto;
     position: relative;
     border-radius: 1em;
     box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
-.form {
+.formC {
     width: 27em;
     margin: 30px auto;
     justify-content: center;
@@ -45,21 +38,40 @@
     align-items: center;
 }
 
-.input {
+.titleC {
+    font-family: 'Post No Bills Jaffna', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ff0000;
+}
+
+.labelC {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.inputC,
+.textareaC {
     border: none;
     background-color: rgb(229, 226, 226);
-    height: 4em;
-    width: 80%;
+    min-height: 5em;
+    min-width: 70em;
     border-radius: 0.25em;
     text-align: center;
     padding: 2em;
 }
 
-.input:focus {
+.textareaC {
+    height: 20em;
+}
+
+.inputC:focus,
+.textareaC:focus {
     outline-color: rgb(156, 156, 156);
 }
 
-.submit-btn {
+.submit-btnC {
     margin-top: 25px;
     width: 50%;
     height: 3em;
@@ -72,10 +84,6 @@
     cursor: pointer;
 }
 
-.submit-btn:hover { 
+.submit-btnC:hover { 
     transform: scale(1.25);
-}
-
-.link-btn {
-    margin-top: 25px;
 }

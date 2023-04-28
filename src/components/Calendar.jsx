@@ -4,10 +4,10 @@ import "./CalendarStyles.css";
 
 const Calendar = () => {
   return (
-    <div>
+    <div className="container">
       <ReactCalendar
         minDate={new Date()}
-        className="REACT-CALENDAR p-2"
+        className="REACT-CALENDAR"
         view="month"
         onClickDay={(date) => console.log(date)}
       />

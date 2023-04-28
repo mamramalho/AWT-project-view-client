@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./EventsStyles.css"
 
 function Events() {
   const [listOfEvents, setListOfEvents] = useState([]);

@@ -1,165 +1,173 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-.react-calendar {
-    width: 100%;
-    max-width: 100%;
-    background-image: linear-gradient(to bottom right, #700000, #ff0000);
-    border-radius: 15px;
-    border: 1px solid rgb(209 213 219);
-    font-family: Manrope, Helvetica, sans-serif;
-    line-height: 1.125em;
-  }
-  .react-calendar--doubleView {
-    width: 700px;
-  }
-  .react-calendar--doubleView .react-calendar__viewContainer {
-    display: flex;
-    margin: -0.5em;
-  }
-  .react-calendar--doubleView .react-calendar__viewContainer > * {
-    width: 50%;
-    margin: 0.5em;
-  }
-  .react-calendar,
-  .react-calendar *,
-  .react-calendar *:before,
-  .react-calendar *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  
-  /* Custom Navigation Styles */
-  @media screen and (max-width: 500px) {
-    .react-calendar__navigation__prev2-button,
-    .react-calendar__navigation__prev-button {
-      display: none;
-    }
-    .react-calendar__navigation__label {
-      padding-left: 1rem;
-      text-align: left;
-    }
-  }
-  
-  .react-calendar button {
-    margin: 0;
-    border: 0;
-    outline: none;
-  }
-  .react-calendar button:enabled:hover {
-    cursor: pointer;
-  }
-  .react-calendar__navigation {
-    display: flex;
-    height: 44px;
-    margin-bottom: 1em;
-  }
-  .react-calendar__navigation button {
-    min-width: 44px;
-    background: none;
-  }
-  .react-calendar__navigation button:disabled {
-    visibility: hidden;
-    background-color: #fff;
-  }
-  .react-calendar__navigation button:enabled:hover,
-  .react-calendar__navigation button:enabled:focus {
-    background-color: #e6e6e6;
-  }
-  .react-calendar__month-view__weekdays {
-    color: #fff;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 0.8em;
-  }
-  /* Each day should be round when hovered */
-  .react-calendar__month-view__days__day {
-    padding: 5px;
-    background-clip: content-box !important;
-    border-radius: 15px !important;
-  }
-  
-  .react-calendar__navigation__label__labelText {
-    font-weight: 500;
-    font-size: 1.05em;
-  }
-  .react-calendar__navigation__label {
-    pointer-events: none;
-  }
-  
-  .react-calendar__navigation__arrow {
-    background-color: #fff;
-    padding: 7px;
-    background-clip: content-box !important;
-    border-radius: 50px;
-    font-size: 1.25em;
-  }
-  .react-calendar__navigation__arrow:hover {
-    background-color: rgb(107 114 128);
-  }
+@import url('https://fonts.cdnfonts.com/css/post-no-bills-jaffna');
 
-  .react-calendar__month-view__weekdays__weekday {
-    padding: 0.75em;
-  }
-  .react-calendar__month-view__weekdays__weekday abbr {
-    text-decoration: none;
-  }
-  .react-calendar__month-view__weekNumbers .react-calendar__tile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75em;
-    font-weight: bold;
-  }
-  .react-calendar__month-view__days__day--neighboringMonth {
-    color: #b3b3b3;
-  }
-  .react-calendar__year-view .react-calendar__tile,
-  .react-calendar__decade-view .react-calendar__tile,
-  .react-calendar__century-view .react-calendar__tile {
-    padding: 2em 0.5em;
-  }
-  .react-calendar__tile {
-    aspect-ratio: 1/1;
-    max-width: 100%;
-    background: none;
-    text-align: center;
-  }
-  .react-calendar__tile:disabled {
-    background-color: #f0f0f0;
-    color: rgb(107 114 128);
-  }
-  .react-calendar__tile:enabled:hover,
-  .react-calendar__tile:enabled:focus {
-    background-color: rgb(238 242 255);
-  }
-  .react-calendar__tile--now {
-    border-radius: 15px;
-    border: 2px solid #333333 !important;
-    color: #333333;
-  }
-  .react-calendar__tile--now:enabled:hover,
-  .react-calendar__tile--now:enabled:focus {
-    background-color: rgb(238 242 255);
-  }
-  .react-calendar__tile--hasActive {
-    background: #76baff;
-  }
-  .react-calendar__tile--hasActive:enabled:hover,
-  .react-calendar__tile--hasActive:enabled:focus {
-    background: #a9d4ff;
-  }
-  .react-calendar__tile--active:enabled:hover,
-  .react-calendar__tile--active:enabled:focus {
-    background: #333333;
-    color: white;
-  }
-  .react-calendar--selectRange .react-calendar__tile--hover {
-    background-color: rgb(238 242 255);
-  }
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.REACT-CALENDAR {
+  height: 100%;
+  width: 90%;
+  background: #ff0606;
+  border-radius: 30px;
+}
+
+.react-calendar--doubleView {
+  width: 700px;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+}
+
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+
+.react-calendar__navigation__label {
+  font-family: 'Post No Bills Jaffna', sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  height: 70px;
+  margin: 1em 1em 1em;
+  font-size: large;
+}
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: #ff0606;
+  color: #e6e6e6;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #e6e6e6;
+}
+
+.react-calendar__month-view__weekdays {
+  margin-top: 1em;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+
+.react-calendar__month-view__days {
+  height: 40em;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #700000;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: rgb(156, 156, 156);
+}
+
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+}
+
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+}
+
+.react-calendar__tile:disabled {
+  background-color: #ff0606;
+  color: #e6e6e6;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #e6e6e6;
+}
+
+.react-calendar__tile--now {
+  background: #700000;
+  color: #fff;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #000000;
+  color: #fff;
+}
+
+.react-calendar__tile--hasActive {
+  background: #fff;
+}
+
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+  background: #fff;
+}
+
+.react-calendar__tile--active {
+  background: #000000;
+  color: #fff;
+}
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #000000;
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #e6e6e6;
+}
+
