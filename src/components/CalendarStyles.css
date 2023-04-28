@@ -51,7 +51,6 @@
 }
 
 .react-calendar__navigation__label {
-  font-family: 'Post No Bills Jaffna', sans-serif;
   font-size: 50px;
   font-weight: bold;
   cursor: pointer;
@@ -63,6 +62,10 @@
   height: 70px;
   margin: 1em 1em 1em;
   font-size: large;
+}
+
+.react-calendar__navigation__label__labelText, .react-calendar__navigation__label__labelText--from {
+  font-family: 'Post No Bills Jaffna', sans-serif;
 }
 
 .react-calendar__navigation button {
@@ -78,6 +81,7 @@
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
   background-color: #e6e6e6;
+  color: #ff0606;
 }
 
 .react-calendar__month-view__weekdays {

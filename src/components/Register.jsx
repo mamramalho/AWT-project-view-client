@@ -14,8 +14,10 @@ export const Register = (props) => {
     const newUser = {
       name,
       email,
-      password
+      password,
     };
+    console.log("password:", password);
+    console.log("repeatPassword:", repeatPassword);
     if (password !== repeatPassword) {
       alert("Passwords do not match");
       return;
@@ -31,8 +33,13 @@ export const Register = (props) => {
       const data = await response.json();
       console.log(data);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
+  };
+
+  const handleRepeatPasswordChange = (e) => {
+    setRepeatPassword(e.target.value);
+    console.log("repeatPassword:", repeatPassword);
   };
   
 
@@ -76,12 +83,12 @@ export const Register = (props) => {
         <label className="label" htmlFor="repeat-password">Repeat Password</label>
         <input
         className="input"
-          value={repeatPassword}
-          onChange={(e) => setRepeatPassword(e.target.value)}
-          type="password"
-          placeholder="********"
-          id="repeat-password"
-          name="repeat-password"
+        value={repeatPassword}
+        onChange={handleRepeatPasswordChange}
+        type="password"
+        placeholder="********"
+        id="repeat-password"
+        name="repeat-password"
         />
         <button className="submit-btn" type="submit">Register</button>
         <div className="link-btn">Already have an account? <Link to="/login"> Sign in. </Link></div>

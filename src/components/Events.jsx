@@ -19,6 +19,7 @@ function Events() {
           return (
             <div className="events">
               <div className="title">{value.title}</div>
+              <button className="delete" type="submit">Delete</button>
               <div className="description">{value.description}</div>
             </div>
           );
