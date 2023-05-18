@@ -32,6 +32,11 @@
     cursor: pointer;
     margin-left: 1em;
 }
+
+.new button:hover {
+    color: white;
+    background-color: #ff0000;
+}
   
 ul {
     list-style-type: none;
@@ -54,14 +59,37 @@ ul {
     margin-top: 2.5em;
     margin-bottom: 2.5em;
 }
-  
+
 .optionsEvent {
     display: flex;
     justify-content: flex-end;
     align-self: flex-start;
     margin-left: auto;
 }
+
+.optionsEvent button {
+    display: inline-block;
+    position: relative;
+}
+
+.optionsEvent button:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff0000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
   
+.optionsEvent button:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
 .optionsEvent button {
     margin-left: 1em;
     cursor: pointer;

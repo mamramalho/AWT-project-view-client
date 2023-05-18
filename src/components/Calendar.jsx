@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactCalendar from "react-calendar";
+import axios from "axios";
 import "./CalendarStyles.css";
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const [listOfEvents, setListOfEvents] = useState([]);
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
-    console.log("Events for date:", date);
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/event").then((response) => {
+      setListOfEvents(response.data);
+    });
+  }, []);
 
   return (
     <div className="container">
@@ -18,13 +25,13 @@ const Calendar = () => {
         view="month"
         onClickDay={handleDateClick}
       />
-      {selectedDate && (
-        <div className="selected-events">
-          <h2>Events for {selectedDate.toDateString()}</h2>
-          {/* Display the events for the selected date */}
-          {/* You can use the selectedDate to filter the events */}
+      {listOfEvents.map((value, index) => (
+        <div className="selected-events" key={index}>
+          <div className="selected-day">Events for {selectedDate && selectedDate.toDateString()}</div>
+          <div className="selected-titleEvent">{value.title}</div>
+          <div className="selected-descriptionEvent">{value.description}</div>
         </div>
-      )}
+      ))}
     </div>
   );
 };
