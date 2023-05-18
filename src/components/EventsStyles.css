@@ -1,45 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://fonts.cdnfonts.com/css/post-no-bills-jaffna');
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+.event-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: "Poppins", sans-serif;
 }
-
-.events {
+  
+.new {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: flex-end;
+    margin-top: 2.5em;
+    margin-right: 2em;
+}
+  
+.new button {
     background-color: white;
-    margin: auto;
-    width: 90%;
-    height: 30vh;
-    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+    padding: 0.5em 1em;
+    font-family: "Post No Bills Jaffna", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ff0000;
+    cursor: pointer;
+    margin-left: 1em;
+}
+  
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+  
+.event {
+    background-color: white;
+    height: 20em;
+    width: 90em;
     border-radius: 1em;
     box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 2em;
+    text-align: center;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
 }
-
-.title {
-    font-family: 'Post No Bills Jaffna', sans-serif;
-    font-size: 60px;
-    font-weight: bold;
+  
+.optionsEvent {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-start;
+    margin-left: auto;
+}
+  
+.optionsEvent button {
+    margin-left: 1em;
     cursor: pointer;
+}
+  
+.titleEvent {
+    margin-bottom: 0.5em;
+    font-family: "Post No Bills Jaffna", sans-serif;
+    font-size: 75px;
+    font-weight: bold;
     color: #ff0000;
 }
-
-.delete {
-    
-    cursor: pointer;
+  
+.descriptionEvent {
+    font-weight: lighter;
+    font-size: 20px;
 }
-
-.description {
-
-}
-
-div:not(:last-child) {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+  
