@@ -10,7 +10,7 @@ export const Login = (props) => {
     e.preventDefault();
   
     try {
-      const response = await fetch("http://localhost:3001/user/", {
+      const response = await fetch("http://localhost:3001/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,13 +21,20 @@ export const Login = (props) => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+        
+        props.history.push("/calendar");
       } else {
-        console.error("Error:", response.status);
+        if (response.status === 401) {
+          throw new Error("Incorrect email or password");
+        } else {
+          throw new Error("Error: " + response.status);
+        }
       }
     } catch (error) {
       console.error("Error:", error.message);
     }
   };
+  
   
 
   return (

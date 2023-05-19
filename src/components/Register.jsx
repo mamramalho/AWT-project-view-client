@@ -23,7 +23,7 @@ export const Register = (props) => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3001/user/", {
+      const response = await fetch("http://localhost:3001/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

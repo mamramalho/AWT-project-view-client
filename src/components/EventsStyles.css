@@ -107,4 +107,59 @@ ul {
     font-weight: lighter;
     font-size: 20px;
 }
+
+.event-popup form {
+    width: 27em;
+    margin: 30px auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .event-popup label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  .event-popup input {
+    border: none;
+    background-color: rgb(229, 226, 226);
+    height: 4em;
+    width: 80%;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 2em;
+    margin-bottom: 1em; /* Added spacing between input fields */
+  }
+  
+  .event-popup input:focus {
+    outline-color: rgb(156, 156, 156);
+  }
+  
+  .event-popup button {
+    display: inline-block;
+    position: relative;
+    margin-left: 1em;
+    cursor: pointer;
+  }
+  
+  .event-popup button:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff0000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .event-popup button:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
   

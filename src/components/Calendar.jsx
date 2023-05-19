@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactCalendar from "react-calendar";
 import axios from "axios";
 import "./CalendarStyles.css";
@@ -7,14 +7,36 @@ const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [listOfEvents, setListOfEvents] = useState([]);
 
-  const handleDateClick = (date) => {
+  const handleDateClick = async (date) => {
+    try {
+      const calendar = { name: "My Calendar" }; // Modify the name according to your requirements
+
+      const response = await axios.post("http://localhost:3001/calendar", calendar);
+
+      if (response.status === 201) {
+        // Calendar created successfully
+        // You can perform additional actions if needed
+      }
+    } catch (error) {
+      console.error("Error creating calendar:", error);
+      // Handle the error
+    }
+
     setSelectedDate(date);
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3001/event").then((response) => {
-      setListOfEvents(response.data);
-    });
+    const fetchEventData = async () => {
+      try {
+        const eventResponse = await axios.get("http://localhost:3001/event");
+        setListOfEvents(eventResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle the error
+      }
+    };
+
+    fetchEventData();
   }, []);
 
   const eventsForSelectedDate = selectedDate
