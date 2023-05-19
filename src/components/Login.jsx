@@ -8,16 +8,27 @@ export const Login = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:3001/user/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    console.log(data);
+  
+    try {
+      const response = await fetch("http://localhost:3001/user/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error("Error:", response.status);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
   };
+  
 
   return (
     <div className="container">

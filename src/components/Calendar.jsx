@@ -17,6 +17,23 @@ const Calendar = () => {
     });
   }, []);
 
+  const eventsForSelectedDate = selectedDate
+    ? listOfEvents.filter((event) => {
+        const eventDate = new Date(event.date);
+        const selectedDateUTC = new Date(
+          Date.UTC(
+            selectedDate.getFullYear(),
+            selectedDate.getMonth(),
+            selectedDate.getDate()
+          )
+        );
+        return (
+          eventDate.toISOString().slice(0, 10) ===
+          selectedDateUTC.toISOString().slice(0, 10)
+        );
+      })
+    : [];
+
   return (
     <div className="container">
       <ReactCalendar
@@ -25,13 +42,23 @@ const Calendar = () => {
         view="month"
         onClickDay={handleDateClick}
       />
-      {listOfEvents.map((value, index) => (
-        <div className="selected-events" key={index}>
-          <div className="selected-day">Events for {selectedDate && selectedDate.toDateString()}</div>
-          <div className="selected-titleEvent">{value.title}</div>
-          <div className="selected-descriptionEvent">{value.description}</div>
+      {selectedDate && (
+        <div className="selected-events">
+          <div className="selected-day">
+            Events for {selectedDate.toDateString()}
+          </div>
+          {eventsForSelectedDate.length > 0 ? (
+            eventsForSelectedDate.map((event, index) => (
+              <div className="event" key={index}>
+                <div className="event-title">{event.title}</div>
+                <div className="event-description">{event.description}</div>
+              </div>
+            ))
+          ) : (
+            <div className="no-events">No events for this date</div>
+          )}
         </div>
-      ))}
+      )}
     </div>
   );
 };
