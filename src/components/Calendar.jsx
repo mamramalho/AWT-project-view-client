@@ -57,7 +57,7 @@ const Calendar = () => {
     : [];
 
   return (
-    <div className="container">
+    <div className="calendar-container">
       <ReactCalendar
         minDate={new Date()}
         className="REACT-CALENDAR"

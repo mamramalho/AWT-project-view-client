@@ -14,28 +14,33 @@ export const Register = (props) => {
     const newUser = {
       name,
       email,
-      password,
+      password
     };
-    console.log("password:", password);
-    console.log("repeatPassword:", repeatPassword);
+  
     if (password !== repeatPassword) {
       alert("Passwords do not match");
       return;
     }
+  
+    /* const token = localStorage.getItem("token"); */
+  
     try {
       const response = await fetch("http://localhost:3001/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          /* Authorization: `Bearer ${token}`, */
         },
         body: JSON.stringify(newUser),
       });
+  
       const data = await response.json();
       console.log(data);
     } catch (err) {
       console.log(err);
     }
   };
+  
 
   const handleRepeatPasswordChange = (e) => {
     setRepeatPassword(e.target.value);
@@ -44,10 +49,10 @@ export const Register = (props) => {
   
 
   return (
-    <div className="container">
-    <div className="form-container">
-      <h2 className="title">Register</h2>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="login-container">
+    <div className="login-form-container">
+      <h2 className="login-title">Register</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
         <label className="label" htmlFor="name">Name</label>
         <input
         className="input"

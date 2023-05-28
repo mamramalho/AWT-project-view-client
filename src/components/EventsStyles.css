@@ -131,7 +131,7 @@ ul {
     border-radius: 0.25em;
     text-align: center;
     padding: 2em;
-    margin-bottom: 1em; /* Added spacing between input fields */
+    margin-bottom: 1em; 
   }
   
   .event-popup input:focus {

@@ -7,7 +7,7 @@
     font-family: "Poppins", sans-serif;
 }
 
-.title {
+.login-title {
     font-family: 'Post No Bills Jaffna', sans-serif;
     font-size: 80px;
     font-weight: bold;
@@ -15,15 +15,15 @@
     color: #ff0000;
 }
 
-.container {
-    height: 100vh;
+.login-container {
+    height: 90vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.form-container {
+.login-form-container {
     background-color: white;
     width: 30em;
     height: auto;
@@ -36,7 +36,7 @@
     justify-content: space-around;
 }
 
-.form {
+.login-form {
     width: 27em;
     margin: 30px auto;
     justify-content: center;
