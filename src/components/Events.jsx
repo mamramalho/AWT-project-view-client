@@ -29,7 +29,7 @@ function EventForm({ onClose, onCreate }) {
         description,
       };
 
-      const response = await axios.post("http://localhost:3001/event", newEvent);
+      const response = await axios.post("http://localhost:3001/events/create", newEvent);
       onCreate(response.data);
       onClose();
     } catch (error) {
@@ -86,7 +86,7 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/event/${eventId}`);
+        const response = await axios.get(`http://localhost:3001/events/${eventId}`);
         const event = response.data;
         setTitle(event.title);
         setDate(event.date);
@@ -122,10 +122,10 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
       };
 
       const response = await axios.put(
-        `http://localhost:3001/event/${eventId}`,
+        `http://localhost:3001/events/${eventId}`,
         updatedEvent
       );
-      onUpdate(response.data); 
+      onUpdate(response.data);
       onClose();
     } catch (error) {
       console.error("Error updating event:", error);
@@ -202,12 +202,10 @@ function Events() {
     setIsCreateEventOpen(false);
   };
 
-// eslint-disable-next-line
-const openEditEvent = (eventId) => {
-  setIsEditEventOpen(true);
-  setEditEventId(eventId);
-};
-  
+  const openEditEvent = (eventId) => {
+    setIsEditEventOpen(true);
+    setEditEventId(eventId);
+  };
 
   const closeEditEvent = () => {
     setIsEditEventOpen(false);
@@ -215,17 +213,14 @@ const openEditEvent = (eventId) => {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3001/event").then((response) => {
+    axios.get("http://localhost:3001/events").then((response) => {
       setListOfEvents(response.data);
     });
   }, []);
 
   const handleEdit = (eventId) => {
-    setIsEditEventOpen(true);
-    setEditEventId(eventId);
+    openEditEvent(eventId);
   };
-  
-  
 
   const handleInvite = (eventId) => {
     console.log("Invite people to event with ID:", eventId);
@@ -233,7 +228,7 @@ const openEditEvent = (eventId) => {
 
   const handleDelete = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:3001/event/${eventId}`);
+      await axios.delete(`http://localhost:3001/events/${eventId}`);
       setListOfEvents((prevList) =>
         prevList.filter((event) => event.events_id !== eventId)
       );
@@ -260,7 +255,7 @@ const openEditEvent = (eventId) => {
           return (
             <div className="event" key={value.events_id}>
               <div className="optionsEvent">
-              <button
+                <button
                   className="editEvent"
                   type="button"
                   onClick={() => handleEdit(value.events_id)}
@@ -303,3 +298,49 @@ const openEditEvent = (eventId) => {
 }
 
 export default Events;
+/* 
+
+// client-side code
+
+import React, { useState } from "react";
+import axios from "axios";
+
+function EventInviteForm({ eventId }) {
+  const [email, setEmail] = useState("");
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleInvite = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/events/invite",
+        {
+          eventId,
+          email,
+        }
+      );
+
+      console.log(response.data.message);
+      // Handle success or show a notification to the user
+    } catch (error) {
+      console.error("Error inviting user:", error);
+      // Handle error or show an error message to the user
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="email"
+        value={email}
+        onChange={handleEmailChange}
+        placeholder="Enter email"
+      />
+      <button onClick={handleInvite}>Invite</button>
+    </div>
+  );
+}
+
+export default EventInviteForm; */
