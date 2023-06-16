@@ -9,9 +9,7 @@ const Calendar = () => {
 
   const handleDateClick = async (date) => {
     try {
-      const calendar = { name: "My Calendar" }; // Modify the name according to your requirements
-
-      const response = await axios.post("http://localhost:3001/calendar", calendar);
+      const response = await axios.post("http://localhost:8080/user/calendar");
 
       if (response.status === 201) {
         // Calendar created successfully
@@ -19,7 +17,6 @@ const Calendar = () => {
       }
     } catch (error) {
       console.error("Error creating calendar:", error);
-      // Handle the error
     }
 
     setSelectedDate(date);
@@ -28,11 +25,10 @@ const Calendar = () => {
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const eventResponse = await axios.get("http://localhost:3001/event");
+        const eventResponse = await axios.get("http://localhost:3001/user/events");
         setListOfEvents(eventResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-        // Handle the error
       }
     };
 

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./LoginStyles.css"
+import "./LoginStyles.css";
+import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const navigate = useNavigate();
   
 
   const handleSubmit = async (e) => {
@@ -25,7 +27,7 @@ export const Register = (props) => {
     /* const token = localStorage.getItem("token"); */
   
     try {
-      const response = await fetch("http://localhost:3001/user/register", {
+      const response = await fetch("http://localhost:8080/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,6 +38,7 @@ export const Register = (props) => {
   
       const data = await response.json();
       console.log(data);
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }

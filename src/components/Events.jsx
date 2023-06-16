@@ -29,7 +29,7 @@ function EventForm({ onClose, onCreate }) {
         description,
       };
 
-      const response = await axios.post("http://localhost:3001/events/create", newEvent);
+      const response = await axios.post("http://localhost:8080/event/create", newEvent);
       onCreate(response.data);
       onClose();
     } catch (error) {
@@ -86,7 +86,7 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/events/${eventId}`);
+        const response = await axios.get(`http://localhost:3001/event/${eventId}`);
         const event = response.data;
         setTitle(event.title);
         setDate(event.date);
@@ -122,7 +122,7 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
       };
 
       const response = await axios.put(
-        `http://localhost:3001/events/${eventId}`,
+        `http://localhost:3001/event/${eventId}`,
         updatedEvent
       );
       onUpdate(response.data);
@@ -186,7 +186,7 @@ function Events() {
   const handleUpdateEvent = (updatedEvent) => {
     setListOfEvents((prevList) =>
       prevList.map((event) => {
-        if (event.events_id === updatedEvent.events_id) {
+        if (event.eventId === updatedEvent.eventId) {
           return updatedEvent;
         }
         return event;
@@ -213,7 +213,7 @@ function Events() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3001/events").then((response) => {
+    axios.get("http://localhost:3001/event").then((response) => {
       setListOfEvents(response.data);
     });
   }, []);
@@ -228,9 +228,9 @@ function Events() {
 
   const handleDelete = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:3001/events/${eventId}`);
+      await axios.delete(`http://localhost:3001/event/${eventId}`);
       setListOfEvents((prevList) =>
-        prevList.filter((event) => event.events_id !== eventId)
+        prevList.filter((event) => event.eventId !== eventId)
       );
       console.log("Event deleted successfully with ID:", eventId);
     } catch (error) {
@@ -253,16 +253,16 @@ function Events() {
       <ul>
         {listOfEvents.map((value) => {
           return (
-            <div className="event" key={value.events_id}>
+            <div className="event" key={value.eventId}>
               <div className="optionsEvent">
                 <button
                   className="editEvent"
                   type="button"
-                  onClick={() => handleEdit(value.events_id)}
+                  onClick={() => handleEdit(value.eventId)}
                 >
                   Edit
                 </button>
-                {isEditEventOpen && editEventId === value.events_id && (
+                {isEditEventOpen && editEventId === value.eventId && (
                   <div className="event-popup">
                     <EventEditForm
                       eventId={editEventId}
@@ -274,14 +274,14 @@ function Events() {
                 <button
                   className="inviteEvent"
                   type="button"
-                  onClick={() => handleInvite(value.events_id)}
+                  onClick={() => handleInvite(value.eventId)}
                 >
                   Invite
                 </button>
                 <button
                   className="deleteEvent"
                   type="button"
-                  onClick={() => handleDelete(value.events_id)}
+                  onClick={() => handleDelete(value.eventId)}
                 >
                   Delete
                 </button>

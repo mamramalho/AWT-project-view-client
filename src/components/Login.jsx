@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./LoginStyles.css";
+import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("ok")
-  
     try {
-      const response = await fetch("http://localhost:3001/user/login", {
+      const response = await fetch("http://localhost:8080/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,9 +25,10 @@ export const Login = (props) => {
         const token = data.token;
         console.log("Token:", token);
         localStorage.setItem("token", token);
+        navigate("/calendar");
       } else {
         const errorText = await response.text();
-        console.log(response)
+        console.log(response);
         throw new Error(errorText);
       }
     } catch (error) {
@@ -35,10 +36,6 @@ export const Login = (props) => {
       console.error("Error:", error.message);
     }
   };
-  
-  
-  
-  
 
   return (
     <div className="login-container">
