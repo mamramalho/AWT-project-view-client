@@ -86,7 +86,7 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/event/${eventId}`);
+        const response = await axios.get(`http://localhost:8080/event/${eventId}`);
         const event = response.data;
         setTitle(event.title);
         setDate(event.date);
@@ -122,7 +122,7 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
       };
 
       const response = await axios.put(
-        `http://localhost:3001/event/${eventId}`,
+        `http://localhost:8080/event/${eventId}`,
         updatedEvent
       );
       onUpdate(response.data);
@@ -213,10 +213,22 @@ function Events() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3001/event").then((response) => {
-      setListOfEvents(response.data);
-    });
+    fetchEvents();
   }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/user/events", {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
+      setListOfEvents(response.data);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
 
   const handleEdit = (eventId) => {
     openEditEvent(eventId);
@@ -228,7 +240,7 @@ function Events() {
 
   const handleDelete = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:3001/event/${eventId}`);
+      await axios.delete(`http://localhost:8080/event/${eventId}/delete`);
       setListOfEvents((prevList) =>
         prevList.filter((event) => event.eventId !== eventId)
       );
@@ -253,16 +265,16 @@ function Events() {
       <ul>
         {listOfEvents.map((value) => {
           return (
-            <div className="event" key={value.eventId}>
+            <div className="event" key={value._id}>
               <div className="optionsEvent">
                 <button
                   className="editEvent"
                   type="button"
-                  onClick={() => handleEdit(value.eventId)}
+                  onClick={() => handleEdit(value._id)}
                 >
                   Edit
                 </button>
-                {isEditEventOpen && editEventId === value.eventId && (
+                {isEditEventOpen && editEventId === value._id && (
                   <div className="event-popup">
                     <EventEditForm
                       eventId={editEventId}
@@ -274,14 +286,14 @@ function Events() {
                 <button
                   className="inviteEvent"
                   type="button"
-                  onClick={() => handleInvite(value.eventId)}
+                  onClick={() => handleInvite(value._id)}
                 >
                   Invite
                 </button>
                 <button
                   className="deleteEvent"
                   type="button"
-                  onClick={() => handleDelete(value.eventId)}
+                  onClick={() => handleDelete(value._id)}
                 >
                   Delete
                 </button>

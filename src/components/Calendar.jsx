@@ -9,7 +9,12 @@ const Calendar = () => {
 
   const handleDateClick = async (date) => {
     try {
-      const response = await axios.post("http://localhost:8080/user/calendar");
+      const response = await axios.post("http://localhost:8080/user/calendar", null, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        }
+      });
 
       if (response.status === 201) {
         // Calendar created successfully
@@ -25,7 +30,12 @@ const Calendar = () => {
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const eventResponse = await axios.get("http://localhost:3001/user/events");
+        const eventResponse = await axios.get("http://localhost:8080/user/events", {
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          }
+        });
         setListOfEvents(eventResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
