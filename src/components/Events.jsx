@@ -29,9 +29,15 @@ function EventForm({ onClose, onCreate }) {
         description,
       };
 
-      const response = await axios.post("http://localhost:8080/event/create", newEvent);
+      const response = await axios.post("http://localhost:8080/event/create", newEvent, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
       onCreate(response.data);
       onClose();
+      window.location.reload();
     } catch (error) {
       console.error("Error creating event:", error);
     }
@@ -86,7 +92,12 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/event/${eventId}`);
+        const response = await axios.get(`http://localhost:8080/event/${eventId}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        });
         const event = response.data;
         setTitle(event.title);
         setDate(event.date);
@@ -122,11 +133,15 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
       };
 
       const response = await axios.put(
-        `http://localhost:8080/event/${eventId}`,
-        updatedEvent
-      );
+        `http://localhost:8080/event/${eventId}/alter`, updatedEvent, {
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        });
       onUpdate(response.data);
       onClose();
+      window.location.reload();
     } catch (error) {
       console.error("Error updating event:", error);
     }
@@ -173,11 +188,70 @@ function EventEditForm({ eventId, onClose, onUpdate }) {
   );
 }
 
+function EventInviteForm({ eventId }) {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const handleInvite = async () => {
+    try {
+      if (!email || !message) {
+        console.log("Email and message are required");
+        return;
+      }
+      const response = await axios.post(
+        "http://localhost:8080/invite",
+        {
+          eventId,
+          email,
+          message,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        }
+      );
+
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Error inviting user:", error);
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="email"
+        value={email}
+        onChange={handleEmailChange}
+        placeholder="Enter email"
+      />
+      <textarea
+        value={message}
+        onChange={handleMessageChange}
+        placeholder="Enter message"
+      />
+      <button onClick={handleInvite}>Invite</button>
+    </div>
+  );
+}
+
+
 function Events() {
   const [listOfEvents, setListOfEvents] = useState([]);
   const [isCreateEventOpen, setIsCreateEventOpen] = useState(false);
   const [isEditEventOpen, setIsEditEventOpen] = useState(false);
   const [editEventId, setEditEventId] = useState(null);
+  const [isInviteFormOpen, setIsInviteFormOpen] = useState(false);
 
   const handleCreateEvent = (newEvent) => {
     setListOfEvents((prevList) => [...prevList, newEvent]);
@@ -235,16 +309,22 @@ function Events() {
   };
 
   const handleInvite = (eventId) => {
-    console.log("Invite people to event with ID:", eventId);
+    setIsInviteFormOpen(eventId);
   };
 
   const handleDelete = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:8080/event/${eventId}/delete`);
+      await axios.delete(`http://localhost:8080/event/${eventId}/delete`, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+      });
       setListOfEvents((prevList) =>
         prevList.filter((event) => event.eventId !== eventId)
       );
       console.log("Event deleted successfully with ID:", eventId);
+      fetchEvents();
     } catch (error) {
       console.error("Error deleting event:", error);
     }
@@ -299,60 +379,22 @@ function Events() {
                 </button>
               </div>
               <div className="titleEvent">{value.title}</div>
-              <div className="dateEvent">{value.date}</div>
+              <div className="dateEvent">{new Date(value.date).toLocaleDateString()}</div>
               <div className="descriptionEvent">{value.description}</div>
             </div>
           );
         })}
       </ul>
+      {isInviteFormOpen && (
+        <div className="event-popup">
+          <EventInviteForm
+            eventId={isInviteFormOpen}
+            fetchEvents={fetchEvents}
+          />
+        </div>
+      )}
     </div>
   );
 }
 
 export default Events;
-/* 
-
-// client-side code
-
-import React, { useState } from "react";
-import axios from "axios";
-
-function EventInviteForm({ eventId }) {
-  const [email, setEmail] = useState("");
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleInvite = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/events/invite",
-        {
-          eventId,
-          email,
-        }
-      );
-
-      console.log(response.data.message);
-      // Handle success or show a notification to the user
-    } catch (error) {
-      console.error("Error inviting user:", error);
-      // Handle error or show an error message to the user
-    }
-  };
-
-  return (
-    <div>
-      <input
-        type="email"
-        value={email}
-        onChange={handleEmailChange}
-        placeholder="Enter email"
-      />
-      <button onClick={handleInvite}>Invite</button>
-    </div>
-  );
-}
-
-export default EventInviteForm; */

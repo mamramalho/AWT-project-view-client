@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Events from "./components/Events";
+import Invites from "./components/Invites";
 import Calendar from "./components/Calendar";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
@@ -17,6 +18,7 @@ class App extends Component {
           <Routes>
             <Route exact path="/calendar" element={<Calendar />} />
             <Route exact path="/events" element={<Events />} />
+            <Route exact path="/invites" element={<Invites />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
             <Route exact path="/contact" element={<Contact />} />

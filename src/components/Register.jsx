@@ -24,14 +24,11 @@ export const Register = (props) => {
       return;
     }
   
-    /* const token = localStorage.getItem("token"); */
-  
     try {
       const response = await fetch("http://localhost:8080/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          /* Authorization: `Bearer ${token}`, */
         },
         body: JSON.stringify(newUser),
       });

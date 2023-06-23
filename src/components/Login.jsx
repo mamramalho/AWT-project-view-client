@@ -13,31 +13,29 @@ export const Login = (props) => {
 
     try {
       const response = await fetch("http://localhost:8080/auth", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "x-auth-token": localStorage.getItem("token"),
-  },
-  body: JSON.stringify({ email, password }),
-});
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-const responseBody = await response.text();
+      const responseBody = await response.text();
 
-console.log(responseBody);
+      console.log(responseBody);
 
-if (response.ok) {
-  const token = responseBody.trim();
-  console.log("Token:", token);
-  localStorage.setItem("token", token);
-  navigate("/calendar");
-} else {
-  console.log(response);
-  const errorText = await response.text();
-  console.error("Error:", errorText);
-}
+      if (response.ok) {
+        const token = responseBody.trim();
+        console.log("Token:", token);
+        localStorage.setItem("token", token);
+        navigate("/calendar");
+      } else {
+        console.log(response);
+        const errorText = await response.text();
+        console.error("Error:", errorText);
+      }
 
-
-      
     } catch (error) {
       console.log(error);
       console.error("Error:", error.message);

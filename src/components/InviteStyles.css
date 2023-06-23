@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/post-no-bills-jaffna');
+
+.invite-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.main {
+    font-family: 'Post No Bills Jaffna', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #700000;
+    margin-left: 40px;
+    margin-top: 1em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.invite {
+    background-color: white;
+    height: 20em;
+    width: 90em;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    text-align: center;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+}
+
+.optionsInvite {
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-start;
+    margin-left: auto;
+}
+
+button {
+    display: inline-block;
+    position: relative;
+}
+
+button:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 4px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff0000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+  
+button:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+button {
+    margin-left: 1em;
+    cursor: pointer;
+}
+
+.from {
+    margin-bottom: 0.5em;
+    font-family: "Post No Bills Jaffna", sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.fromFrom {
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+}
+
+.message {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.messageMessage {
+    font-weight: lighter;
+    font-size: 20px;
+}
+  
+.status {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.statusStatus {
+    font-weight: lighter;
+    font-size: 20px;
+}
