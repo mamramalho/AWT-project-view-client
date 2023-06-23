@@ -108,58 +108,54 @@ ul {
     font-size: 20px;
 }
 
-.event-popup form {
-    width: 27em;
-    margin: 30px auto;
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9998;
+    display: none;
+}
+  
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-width: 90%;
+    z-index: 9999;
+    display: flex;
     justify-content: center;
+    align-items: center;
+}
+  
+.popup-container.active {
+    display: flex;
+}
+  
+.event-form {
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
+    padding: 2em;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
+    gap: 1em;
+}
   
-  .event-popup label {
-    font-size: 16px;
-    font-weight: bold;
+.event-form label {
+    display: block;
     margin-bottom: 0.5em;
-  }
+}
   
-  .event-popup input {
-    border: none;
-    background-color: rgb(229, 226, 226);
-    height: 4em;
-    width: 80%;
-    border-radius: 0.25em;
-    text-align: center;
-    padding: 2em;
-    margin-bottom: 1em; 
-  }
-  
-  .event-popup input:focus {
-    outline-color: rgb(156, 156, 156);
-  }
-  
-  .event-popup button {
-    display: inline-block;
-    position: relative;
-    margin-left: 1em;
-    cursor: pointer;
-  }
-  
-  .event-popup button:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 4px;
-    bottom: 0;
-    left: 0;
-    background-color: #ff0000;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-  }
-  
-  .event-popup button:hover:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
+.custom-marker-icon {
+    color: #FF0000; /* Customize the color if desired */
+}
   

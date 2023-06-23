@@ -17,7 +17,7 @@ class App extends Component {
           <Navbar />
           <Routes>
             <Route exact path="/calendar" element={<Calendar />} />
-            <Route exact path="/events" element={<Events />} />
+            <Route path="/events" element={<Events />} />
             <Route exact path="/invites" element={<Invites />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />

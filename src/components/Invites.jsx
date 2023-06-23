@@ -25,21 +25,25 @@ const Invites = () => {
 
   const handleAccept = async (inviteId) => {
     try {
-      await axios.post(`http://localhost:8080/invite/${inviteId}/accept`, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": localStorage.getItem("token"),
-        },
-      });
-      setInvites(invites.filter(invite => invite._id !== inviteId));
+      await axios.post(
+        `http://localhost:8080/invite/${inviteId}/accept`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        }
+      );
+      setInvites(invites.filter((invite) => invite._id !== inviteId));
     } catch (error) {
-      console.error('Error accepting invite:', error);
+      console.error("Error accepting invite:", error);
     }
   };
 
   const handleDecline = async (inviteId) => {
     try {
-      await axios.post(`http://localhost:8080/invite/${inviteId}/decline`, {
+      await axios.delete(`http://localhost:8080/invite/${inviteId}/decline`, {
         headers: {
           "Content-Type": "application/json",
           "x-auth-token": localStorage.getItem("token"),
@@ -67,8 +71,8 @@ const Invites = () => {
                   <button onClick={() => handleDecline(invite._id)}>Decline</button>
                 </div>
               )}
-                <div className="from">Invite ID: 
-                <div className="fromFrom">{invite._id}</div></div>
+                <div className="from">From user: 
+                <div className="fromFrom">{invite.senderName}</div></div>
                 <div className="message">Message: 
                 <div className="messageMessage">{invite.message}</div></div>
                 <div className="status">Status: 

@@ -2,41 +2,29 @@ import React, { useState, useEffect } from "react";
 import ReactCalendar from "react-calendar";
 import axios from "axios";
 import "./CalendarStyles.css";
+import { useNavigate } from "react-router-dom";
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [listOfEvents, setListOfEvents] = useState([]);
+  const navigate = useNavigate();
+  const [showCreateEventButton, setShowCreateEventButton] = useState(false);
 
-  const handleDateClick = async (date) => {
-    try {
-      const response = await axios.post("http://localhost:8080/user/calendar", null, {
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": localStorage.getItem("token"),
-        }
-      });
-
-      if (response.status === 201) {
-        // Calendar created successfully
-        // You can perform additional actions if needed
-      }
-    } catch (error) {
-      console.error("Error creating calendar:", error);
-    }
-
+  const handleDateClick = (date) => {
     setSelectedDate(date);
+    setShowCreateEventButton(true);
   };
 
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const eventResponse = await axios.get("http://localhost:8080/user/events", {
+        const response = await axios.get("http://localhost:8080/user/events", {
           headers: {
             "Content-Type": "application/json",
             "x-auth-token": localStorage.getItem("token"),
-          }
+          },
         });
-        setListOfEvents(eventResponse.data);
+        setListOfEvents(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -62,6 +50,23 @@ const Calendar = () => {
       })
     : [];
 
+    const handleCreateEvent = () => {
+      navigate("/events", {
+        state: {
+          selectedDate: selectedDate,
+          showCreateForm: true,
+        },
+      });
+    };
+    
+    const handleInvite = () => {
+      navigate("/events", {
+        state: {
+          selectedDate: selectedDate,
+        },
+      });
+    };
+
   return (
     <div className="calendar-container">
       <ReactCalendar
@@ -84,6 +89,14 @@ const Calendar = () => {
             ))
           ) : (
             <div className="no-events">No events for this date</div>
+          )}
+
+          {showCreateEventButton && (
+            <button onClick={handleCreateEvent}>Create Event</button>
+          )}
+
+          {eventsForSelectedDate.length > 0 && (
+            <button onClick={handleInvite}>Invite</button>
           )}
         </div>
       )}
